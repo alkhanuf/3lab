@@ -78,6 +78,7 @@
             cmbFirstType.Name = "cmbFirstType";
             cmbFirstType.Size = new Size(45, 28);
             cmbFirstType.TabIndex = 4;
+            cmbFirstType.SelectedIndexChanged += cmbFirstType_SelectedIndexChanged;
             // 
             // cmbSecondType
             // 
@@ -86,6 +87,7 @@
             cmbSecondType.Name = "cmbSecondType";
             cmbSecondType.Size = new Size(45, 28);
             cmbSecondType.TabIndex = 5;
+            cmbSecondType.SelectedIndexChanged += cmbSecondType_SelectedIndexChanged;
             // 
             // cmbResultType
             // 
@@ -94,6 +96,7 @@
             cmbResultType.Name = "cmbResultType";
             cmbResultType.Size = new Size(45, 28);
             cmbResultType.TabIndex = 6;
+            cmbResultType.SelectedIndexChanged += cmbResultType_SelectedIndexChanged;
             // 
             // Form1
             // 
