@@ -16,6 +16,11 @@ namespace _3lab
             this.type = type;
         }
 
+        public double GetValue()
+        {
+            return this.value;
+        }
+
         public string Verbose()
         {
             string typeVerbose = "";
@@ -31,10 +36,58 @@ namespace _3lab
                     typeVerbose = "л";
                     break;
                 case VolumeType.barr:
-                    typeVerbose = "барр";
+                    typeVerbose = "б";
                     break;
             }
-            return String.Format("{0} {1}", this.value, typeVerbose);
+            return String.Format("{0} {1}", Math.Round(this.value, 6), typeVerbose);
+        }
+
+        public Volume To(VolumeType newType)
+        {
+            double newValue = this.value;
+           
+            if (this.type == VolumeType.m3)
+            {
+                switch (newType)
+                {
+                    case VolumeType.m3:
+                        newValue = this.value;
+                        break;
+                    case VolumeType.ml:
+                        newValue = this.value / 0.000001;
+                        break;
+                    case VolumeType.l:
+                        newValue = this.value / 0.001;
+                        break;
+                    case VolumeType.barr:
+                        newValue = this.value / 0.158987;
+                        break;
+                }
+            }
+            else if (newType == VolumeType.m3)
+            {     
+                switch (this.type)
+                {
+                    case VolumeType.m3:
+                        newValue = this.value;
+                        break;
+                    case VolumeType.ml:
+                        newValue = this.value * 0.000001;
+                        break;
+                    case VolumeType.l:
+                        newValue = this.value * 0.001;
+                        break;
+                    case VolumeType.barr:
+                        newValue = this.value * 0.158987;
+                        break;
+                }
+            }
+            else
+            {              
+                newValue = this.To(VolumeType.m3).To(newType).value;
+            }
+
+            return new Volume(newValue, newType);
         }
     }
 }
