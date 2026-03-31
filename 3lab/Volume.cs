@@ -89,5 +89,108 @@ namespace _3lab
 
             return new Volume(newValue, newType);
         }
+
+
+        public static Volume operator +(Volume val, double number)
+        {
+            return new Volume(val.value + number, val.type);
+        }
+
+        public static Volume operator +(double number, Volume val)
+        {
+            return val + number;
+        }
+
+
+
+        public static Volume operator -(Volume val, double number)
+        {
+            return new Volume(val.value - number, val.type);
+        }
+
+        public static Volume operator -(double number, Volume val)
+        {
+            return new Volume(number - val.value, val.type);
+        }
+
+
+        public static Volume operator *(Volume val, double number)
+        {
+            return new Volume(val.value * number, val.type);
+        }
+
+        public static Volume operator *(double number, Volume val)
+        {
+            return val * number;
+        }
+
+
+
+        public static Volume operator /(Volume val, double number)
+        {
+            return new Volume(val.value / number, val.type);
+        }
+
+        public static Volume operator /(double number, Volume val)
+        {            
+            return new Volume(number / val.value, val.type);
+        }
+
+
+
+        public static Volume operator +(Volume val1, Volume val2)
+        {
+            return val1 + val2.To(val1.type).value;
+        }
+
+
+        public static Volume operator -(Volume val1, Volume val2)
+        {
+            return val1 - val2.To(val1.type).value;
+        }
+
+
+
+        public static bool operator >(Volume val1, Volume val2)
+        {
+            double value1InM3 = val1.To(VolumeType.m3).value;
+            double value2InM3 = val2.To(VolumeType.m3).value;
+            return value1InM3 > value2InM3;
+        }
+
+        public static bool operator <(Volume val1, Volume val2)
+        {
+            double value1InM3 = val1.To(VolumeType.m3).value;
+            double value2InM3 = val2.To(VolumeType.m3).value;
+            return value1InM3 < value2InM3;
+        }
+
+        public static bool operator >=(Volume val1, Volume val2)
+        {
+            return val1 > val2 || val1 == val2;
+        }
+
+        public static bool operator <=(Volume val1, Volume val2)
+        {
+            return val1 < val2 || val1 == val2;
+        }
+
+        public static bool operator ==(Volume val1, Volume val2)
+        {
+            if (ReferenceEquals(val1, null) || ReferenceEquals(val2, null))
+            {
+                return ReferenceEquals(val1, val2);
+            }
+               
+
+            double value1InM3 = val1.To(VolumeType.m3).value;
+            double value2InM3 = val2.To(VolumeType.m3).value;
+            return Math.Abs(value1InM3 - value2InM3) < 0.000001;
+        }
+
+        public static bool operator !=(Volume val1, Volume val2)
+        {
+            return !(val1 == val2);
+        }
     }
 }
