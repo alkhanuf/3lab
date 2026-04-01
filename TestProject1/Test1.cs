@@ -24,22 +24,22 @@ namespace TestProject1
         [TestMethod]
         public void ConversionTest()
         {
-            var volume = new Volume(1, VolumeType.m3);
-            Assert.AreEqual("1000 л", volume.To(VolumeType.l).Verbose());
-            Assert.AreEqual("1000000 мл", volume.To(VolumeType.ml).Verbose());
-            Assert.AreEqual("6,289822 б", volume.To(VolumeType.barr).Verbose());
+            Volume volume = new Volume(1, VolumeType.m3);
+            Assert.AreEqual(new Volume(1000, VolumeType.l), volume.To(VolumeType.l));
+            Assert.AreEqual(new Volume(1000000, VolumeType.ml), volume.To(VolumeType.ml));
+            Assert.AreEqual(new Volume(6.289822, VolumeType.barr), volume.To(VolumeType.barr));
 
             volume = new Volume(1, VolumeType.l);
-            Assert.AreEqual("0,001 м3", volume.To(VolumeType.m3).Verbose());
-            Assert.AreEqual("1000 мл", volume.To(VolumeType.ml).Verbose());
+            Assert.AreEqual(new Volume(0.001, VolumeType.m3), volume.To(VolumeType.m3));
+            Assert.AreEqual(new Volume(1000, VolumeType.ml), volume.To(VolumeType.ml));
 
             volume = new Volume(1, VolumeType.barr);
-            Assert.AreEqual("158,987 л", volume.To(VolumeType.l).Verbose());
-            Assert.AreEqual("0,158987 м3", volume.To(VolumeType.m3).Verbose());
+            Assert.AreEqual(new Volume(158.987, VolumeType.l), volume.To(VolumeType.l));
+            Assert.AreEqual(new Volume(0.158987, VolumeType.m3), volume.To(VolumeType.m3));
 
             volume = new Volume(1000, VolumeType.ml);
-            Assert.AreEqual("1 л", volume.To(VolumeType.l).Verbose());
-            Assert.AreEqual("0,001 м3", volume.To(VolumeType.m3).Verbose());
+            Assert.AreEqual(new Volume(1, VolumeType.l), volume.To(VolumeType.l));
+            Assert.AreEqual(new Volume(0.001, VolumeType.m3), volume.To(VolumeType.m3));
         }
 
         [TestMethod]
@@ -83,8 +83,8 @@ namespace TestProject1
             var result1 = volume + 3;
             var result2 = 3 + volume;
 
-            Assert.AreEqual("8 л", result1.Verbose());
-            Assert.AreEqual("8 л", result2.Verbose());
+            Assert.AreEqual(new Volume(8, VolumeType.l), result1);
+            Assert.AreEqual(new Volume(8, VolumeType.l), result2);
         }
 
         [TestMethod]
@@ -94,8 +94,8 @@ namespace TestProject1
             var result1 = volume - 2.5;
             var result2 = 5 - volume;
 
-            Assert.AreEqual("7,5 л", result1.Verbose());
-            Assert.AreEqual("-5 л", result2.Verbose());
+            Assert.AreEqual(new Volume(7.5, VolumeType.l), result1);
+            Assert.AreEqual(new Volume(-5, VolumeType.l), result2);
         }
 
         [TestMethod]
@@ -105,8 +105,8 @@ namespace TestProject1
             var result1 = volume * 4;
             var result2 = 2 * volume;
 
-            Assert.AreEqual("12 м3", result1.Verbose());
-            Assert.AreEqual("6 м3", result2.Verbose());
+            Assert.AreEqual(new Volume(12, VolumeType.m3), result1);
+            Assert.AreEqual(new Volume(6, VolumeType.m3), result2);
         }
 
         [TestMethod]
@@ -116,8 +116,8 @@ namespace TestProject1
             var result1 = volume / 3;
             var result2 = 30 / volume;
 
-            Assert.AreEqual("5 л", result1.Verbose());
-            Assert.AreEqual("2 л", result2.Verbose());
+            Assert.AreEqual(new Volume(5, VolumeType.l), result1);
+            Assert.AreEqual(new Volume(2, VolumeType.l), result2);
         }
 
         [TestMethod]
@@ -127,9 +127,9 @@ namespace TestProject1
             var l = new Volume(500, VolumeType.l);
             var ml = new Volume(500000, VolumeType.ml);
 
-            Assert.AreEqual("1,5 м3", (m3 + l).Verbose());
-            Assert.AreEqual("1500 л", (l + m3).Verbose());
-            Assert.AreEqual("1000000 мл", (ml + l).Verbose());
+            Assert.AreEqual(new Volume(1.5, VolumeType.m3), m3 + l);
+            Assert.AreEqual(new Volume(1500, VolumeType.l), l + m3);
+            Assert.AreEqual(new Volume(1000000, VolumeType.ml), ml + l);
         }
 
         [TestMethod]
@@ -138,9 +138,8 @@ namespace TestProject1
             var m3 = new Volume(2, VolumeType.m3);
             var l = new Volume(500, VolumeType.l);
 
-            Assert.AreEqual("1,5 м3", (m3 - l).Verbose());
-            Assert.AreEqual("-1500 л", (l - m3).Verbose());
+            Assert.AreEqual(new Volume(1.5, VolumeType.m3), m3 - l);
+            Assert.AreEqual(new Volume(-1500, VolumeType.l), l - m3);
         }
-
     }
 }

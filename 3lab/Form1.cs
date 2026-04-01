@@ -57,6 +57,7 @@ namespace _3lab
                 var firstValue = double.Parse(txtFirst.Text);
                 var secondValue = double.Parse(txtSecond.Text);
 
+
                 VolumeType firstType = GetVolumeType(cmbFirstType);
                 VolumeType secondType = GetVolumeType(cmbSecondType);
                 VolumeType resultType = GetVolumeType(cmbResultType);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -177,12 +178,6 @@ namespace _3lab
 
         public static bool operator ==(Volume val1, Volume val2)
         {
-            if (ReferenceEquals(val1, null) || ReferenceEquals(val2, null))
-            {
-                return ReferenceEquals(val1, val2);
-            }
-               
-
             double value1InM3 = val1.To(VolumeType.m3).value;
             double value2InM3 = val2.To(VolumeType.m3).value;
             return Math.Abs(value1InM3 - value2InM3) < 0.000001;
@@ -192,5 +187,15 @@ namespace _3lab
         {
             return !(val1 == val2);
         }
+
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Volume))
+                return false;
+            else
+                return this == ((Volume)obj);
+        }
+
     }
 }
